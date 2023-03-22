@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { NavBar, ViewReviews, AddReview } from "./Components";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { } from 'react-router'
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    if (!localStorage.getItem("reviewData")) {
+      localStorage.setItem("reviewData", JSON.stringify([]));
+    }
+  },[])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+    <div className="App app-container">
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<ViewReviews />} exact/>
+        <Route path="/addReview" element={<AddReview /> } exact/>
+      </Routes>
     </div>
+    </BrowserRouter>
   );
 }
 
