@@ -48,7 +48,7 @@ const AddReview = ({addReviewData}) => {
             setEmailError(!value.trim() ? 'Please Enter Email.' : '')
         }
         if (name === "phoneNo") {
-            setPhoneNoError(!value.trim() ? 'Please Enter Phone No.' : parseInt(value.trim()).length === 10 ? '' :'Please Enter Valid Phone No.' )
+            setPhoneNoError(!value.trim() ? 'Please Enter Phone No.' : value.trim().length === 10 ? '' :'Please Enter Valid Phone No.' )
         }
         if (name === "star") {
             setStarError(!value.trim() ? 'Please Enter Star.' : parseInt(value.trim()) > 5 ? 'please enter Between 0 to 5 star' :'')
