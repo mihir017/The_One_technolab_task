@@ -6,3 +6,9 @@ export const setReviewData = (data = {}) => {
         localStorage.setItem("reviewData", JSON.stringify([...reviews, data]))
     }
 }
+
+export const deleteReviewFromLocal = (id = '') => {
+    const reviews = JSON.parse(localStorage.getItem("reviewData"));
+    const remainReview = reviews.filter(item => item?.id !== id);
+     localStorage.setItem("reviewData", JSON.stringify(remainReview))
+}

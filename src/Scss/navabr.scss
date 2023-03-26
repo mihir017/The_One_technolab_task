@@ -2,13 +2,29 @@
     .logo{
         font-size: 32px;
         font-weight: 600;
-        color: rgb(75, 59, 22);
+        color: #5DA7DB;
     }
     .nav-lists{
         li{
             font-size: 16px;
             font-weight: 400;
             margin: 0px 12px;
+            a{
+                position: relative;
+                padding: 8px 0px;
+                &.active{
+                    font-weight: 700;
+                    color: #5DA7DB;
+                    &::after{
+                        content: '';
+                        position: absolute;
+                        bottom: 0px;
+                        left: 0px;
+                        width: 100%;
+                        border: 1px solid #5DA7DB;
+                    }
+                }
+            }
         }
     }
 }

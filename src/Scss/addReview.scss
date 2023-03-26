@@ -1,5 +1,11 @@
 .add-review-container{
-    margin-top: 120px;
+    margin: 120px auto;
+    max-width: 500px;
+    width: 100%;
+    padding: 30px;
+    background-color: #c2e4f114;
+    border: 2px solid #2ea8d7;
+    border-radius: 12px;
     .review-form-container{
         margin-top: 20px;
         .form{
@@ -9,15 +15,16 @@
                     font-size: 14px;
                     font-weight: 400;
                     margin-bottom: 2px;
+                    color: #251B37;
                 }
                 .input-field,.text-area-field{
                     padding: 8px 12px;
                     font-size: 16px;
                     color: rgb(26, 23, 23);
                     border-radius: 6px;
-                    border: 1px solid gray;
+                    border: 1px solid #251b373b;
                     outline: none;
-                    width: 400px;
+                    width: 100%;
                     &.error-field{
                         outline: red;
                         border: 1px solid red;
@@ -34,14 +41,54 @@
                 }
             }
             .btn{
-                padding: 8px 12px;
-                border-radius: 6px;
+                padding: 12px;
+                border-radius: 8px;
                 font-size: 16px;
-                font-weight: 500;
+                font-weight: 600;
                 border: none;
-                background-color: blue;
+                text-transform: capitalize;
+                background-color: #5DA7DB;
                 color: white;
+                width: 100%;
+                cursor: pointer;
+                &.disable{
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                }
             }
         }
+    }
+}
+.alert-container{
+    position: absolute;
+    bottom: 40px;
+    left: -500px;
+    max-width: 450px;
+    width: 100%;
+    .alert-box{
+        padding: 12px 16px;
+        background: #40b0ff;
+        color: white;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        &.sucess-alert{
+            background: #4d4d4d;
+            color: #82CD47;
+        }
+        &.error-alert{
+            background: #e55a5a;
+        }
+    }
+    &.alert-show{
+        animation: showAlert .5s forwards;
+        transition: .5s all ease-in;
+    }
+}
+@keyframes showAlert{
+    from {
+        left: -500px;
+    } to {
+        left: 30px;
     }
 }

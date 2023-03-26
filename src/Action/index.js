@@ -11,3 +11,10 @@ export const fetchReviewData = (data) => {
         payload: data
     }
 }
+
+export const deleteReview = (id) => {
+    return {
+        type: 'DELETE_REVIEW',
+        payload: id,
+    }
+}

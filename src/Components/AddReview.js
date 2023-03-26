@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import { addReviewData } from '../Action';
+import { Alert } from './index'
+import uuid from 'react-uuid';
 
 const AddReview = ({addReviewData}) => {
 
     const [reviewData, SetReviewData] = useState({
+        id: '',
         fullName: '',
         email: '',
         phoneNo: '',
@@ -16,19 +19,30 @@ const AddReview = ({addReviewData}) => {
     const [emailError, setEmailError] = useState('');
     const [phoneNoError, setPhoneNoError] = useState('');
     const [starError, setStarError] = useState('');
+    const [message, setMessage] = useState('');
+    const [error, setError] = useState(false);
 
     const handleInputData = (e) => {
         const { name, value } = e?.target;
         SetReviewData({...reviewData, [name]: value})
     }
 
-       
+    const showMessages = (message, error) => {
+        setMessage(message);
+        setError(error);
+        setTimeout(() => {
+            setMessage('')
+            setError(false)
+        }, 4000)
+    }
 
     const handleSubmitReview = (e) => {
         e.preventDefault();
         if (!starError && !fullNameError && !emailError && !phoneNoError) { 
-            addReviewData(reviewData);
+            
+            addReviewData({...reviewData,id: uuid()});
             console.log(reviewData);
+            showMessages('Review Added Successfully.', false);
             SetReviewData({
                 fullName: '',
                 email: '',
@@ -36,7 +50,12 @@ const AddReview = ({addReviewData}) => {
                 star: '',
                 comment: '',
             });
+
         }
+    }
+
+    const checkEmptyForm = () => {
+        return !(reviewData?.fullName && reviewData?.email && reviewData?.phoneNo && reviewData?.star) 
     }
 
     const handleStartInput = (e) => {
@@ -57,9 +76,10 @@ const AddReview = ({addReviewData}) => {
 
   return (
       <div className='add-review-container'>
+          <Alert message={message} error={error} />
           <h2 className='header-title'>Add Review</h2>
           <div className='review-form-container'>
-              <form className='form' onSubmit={handleSubmitReview}>
+              <form className='form' onSubmit={(e) =>  !checkEmptyForm() && handleSubmitReview(e)  }>
                   <div className='form-group'>
                       <label htmlFor='fullName'>Full Name<span className='requireed'>*</span></label>
                       <input name='fullName' onBlur={handleStartInput} onChange={handleInputData}  value={reviewData?.fullName} type='text' id='fullName' className={`input-field ${fullNameError? 'error-field input-field' : ''}`} />
@@ -84,7 +104,7 @@ const AddReview = ({addReviewData}) => {
                       <label htmlFor='comment'>Comment</label>
                       <textarea name='comment' onChange={handleInputData} value={reviewData?.comment} id='comment' className='text-area-field' />
                   </div>
-                  <button className='btn' type='submit'>Submit Review</button>
+                  <button className={`btn ${checkEmptyForm() ? 'disable' : ''}`} type='submit'>Submit Review</button>
               </form>
           </div>
     </div>
