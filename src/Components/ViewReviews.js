@@ -31,7 +31,7 @@ const ViewReviews = ({ reviews, fetchReviewData, deleteReview }) => {
   return (
       <div className='review-list-container'>
           <Alert message={message} error={error} />
-          <h2 className='header-title'>Review Lists</h2>
+          <h2 className='header-title'>Total Reviews</h2>
           <div className='review-list'>
               {reviews?.length ? reviews?.map((review,index) => (
                   <div className='review-item' key={index}>
